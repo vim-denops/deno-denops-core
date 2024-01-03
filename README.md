@@ -4,13 +4,13 @@
 [![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/denops_core/mod.ts)
 [![deno land](http://img.shields.io/badge/available%20on-deno.land/x/denops__core-lightgrey.svg?logo=deno)](https://deno.land/x/denops_core)
 
-This is a core module of [denops.vim][denops.vim] which is an ecosystem of
-Vim/Neovim to write plugins in [Deno][deno].
+This module is a fundamental component of [denops.vim], an ecosystem for
+crafting plugins in [Deno] for Vim/Neovim.
 
-Note that most of users should use [denops_std][denops_std] module instead to
-write plugins of [denops.vim][denops.vim]. This module is designed as a core
-layer of [denops_std][denops_std] so using this module directly from plugins is
-strongly dis-recommended.
+It's essential to highlight that the recommended practice for most users is to
+utilize the [denops_std] module when developing plugins for [denops.vim]. The
+current module is structured as a foundational layer within [denops_std], and
+utilizing it directly from plugins is **strongly discouraged**.
 
 [deno]: https://deno.land/
 [denops.vim]: https://github.com/vim-denops/denops.vim

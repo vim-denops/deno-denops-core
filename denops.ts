@@ -1,22 +1,22 @@
 /**
- * Method dispatcher
+ * API dispatcher
  */
-export interface Dispatcher {
+export type Dispatcher = {
   [key: string]: (...args: unknown[]) => unknown;
-}
+};
 
 /**
- * Context which is expanded to the local namespace (l:)
+ * Context that expands into the local namespace (l:)
  */
 export type Context = Record<string, unknown>;
 
 /**
  * Environment meta information.
  */
-export interface Meta {
+export type Meta = {
   // Current denops mode.
-  // In "debug" or "test" mode, some features become enabled
-  // which might impact the performance.
+  // In "debug" or "test" mode, some features become enabled,
+  // which might impact performance.
   readonly mode: "release" | "debug" | "test";
   // Host program.
   readonly host: "vim" | "nvim";
@@ -24,28 +24,33 @@ export interface Meta {
   readonly version: string;
   // Host platform name.
   readonly platform: "windows" | "mac" | "linux";
-}
+};
 
 /**
- * Batch error which is raised when one of function fails during batch process
+ * Batch error raised when one of the functions fails during batch process.
  */
 export class BatchError extends Error {
-  // A result list which is successfully completed prior to the error
+  // A result list that is successfully completed prior to the error.
   readonly results: unknown[];
 
   constructor(message: string, results: unknown[]) {
     super(message);
-    this.name = "BatchError";
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, BatchError);
+    }
+
+    this.name = this.constructor.name;
     this.results = results;
   }
 }
 
 /**
- * Denpos is a facade instance visible from each denops plugins.
+ * Denops is a facade instance visible from each denops plugin.
  */
-export interface Denops {
+export type Denops = {
   /**
-   * Denops instance name which uses to communicate with vim.
+   * Denops instance name used to communicate with Vim.
    */
   readonly name: string;
 
@@ -57,25 +62,25 @@ export interface Denops {
   /**
    * Context object for plugins.
    */
-  readonly context: Record<string | number | symbol, unknown>;
+  readonly context: Record<PropertyKey, unknown>;
 
   /**
-   * User defined API name and method map which is used to dispatch API request
+   * User-defined API name and method map used to dispatch API requests.
    */
   dispatcher: Dispatcher;
 
   /**
    * Redraw text and cursor on Vim.
    *
-   * It's not equivalent to `redraw` command on Vim script and does nothing on Neovim.
-   * Use `denops.cmd('redraw')` instead if you need to execute `redraw` command.
+   * It is not equivalent to the `redraw` command in Vim script and does nothing on Neovim.
+   * Use `denops.cmd('redraw')` instead if you need to execute the `redraw` command.
    *
-   * @param force: Clear screen prior to redraw.
+   * @param force: Clear the screen prior to redraw.
    */
   redraw(force?: boolean): Promise<void>;
 
   /**
-   * Call an arbitrary function of Vim/Neovim and return the result
+   * Call an arbitrary function of Vim/Neovim and return the result.
    *
    * @param fn: A function name of Vim/Neovim.
    * @param args: Arguments of the function.
@@ -88,11 +93,11 @@ export interface Denops {
    * Call arbitrary functions of Vim/Neovim sequentially without redraw and
    * return the results.
    *
-   * It throw a BatchError when one of a function fails. The `results` attribute
+   * It throws a BatchError when one of the functions fails. The `results` attribute
    * of the error instance holds succeeded results of functions prior to the
    * error.
    *
-   * @param calls: A list of tuple ([fn, args]) to call Vim/Neovim functions.
+   * @param calls: A list of tuples ([fn, args]) to call Vim/Neovim functions.
    *
    * Note that arguments after `undefined` in `args` will be dropped for convenience.
    */
@@ -102,7 +107,7 @@ export interface Denops {
    * Execute an arbitrary command of Vim/Neovim under a given context.
    *
    * @param cmd: A command expression to be executed.
-   * @param ctx: A context object which is expanded to the local namespace (l:)
+   * @param ctx: A context object that expands into the local namespace (l:)
    */
   cmd(cmd: string, ctx?: Context): Promise<void>;
 
@@ -110,7 +115,7 @@ export interface Denops {
    * Evaluate an arbitrary expression of Vim/Neovim under a given context and return the result.
    *
    * @param expr: An expression to be evaluated.
-   * @param ctx: A context object which is expanded to the local namespace (l:)
+   * @param ctx: A context object that expands into the local namespace (l:)
    */
   eval(expr: string, ctx?: Context): Promise<unknown>;
 
@@ -122,4 +127,4 @@ export interface Denops {
    * @param args: Arguments of the function.
    */
   dispatch(name: string, fn: string, ...args: unknown[]): Promise<unknown>;
-}
+};
