@@ -14,15 +14,23 @@ export type Context = Record<string, unknown>;
  * Environment meta information.
  */
 export interface Meta {
-  // Current denops mode.
-  // In "debug" or "test" mode, some features become enabled,
-  // which might impact performance.
+  /**
+   * Current denops mode.
+   * In "debug" or "test" mode, some features become enabled,
+   * which might impact performance.
+   */
   readonly mode: "release" | "debug" | "test";
-  // Host program.
+  /**
+   * Host program.
+   */
   readonly host: "vim" | "nvim";
-  // Host program version.
+  /**
+   * Host program version.
+   */
   readonly version: string;
-  // Host platform name.
+  /**
+   * Host platform name.
+   */
   readonly platform: "windows" | "mac" | "linux";
 }
 
@@ -30,7 +38,9 @@ export interface Meta {
  * Batch error raised when one of the functions fails during batch process.
  */
 export class BatchError extends Error {
-  // A result list that is successfully completed prior to the error.
+  /**
+   * A result list that is successfully completed prior to the error.
+   */
   readonly results: unknown[];
 
   constructor(message: string, results: unknown[]) {
