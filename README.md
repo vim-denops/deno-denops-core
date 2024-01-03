@@ -1,8 +1,8 @@
 # 🪐 denops_core
 
 [![test](https://github.com/vim-denops/deno-denops/workflows/test/badge.svg)](https://github.com/vim-denops/deno-denops/actions?query=workflow%3Atest)
-[![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/denops/mod.ts)
-[![deno land](http://img.shields.io/badge/available%20on-deno.land/x/denops-lightgrey.svg?logo=deno)](https://deno.land/x/denops)
+[![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/denops_core/mod.ts)
+[![deno land](http://img.shields.io/badge/available%20on-deno.land/x/denops__core-lightgrey.svg?logo=deno)](https://deno.land/x/denops_core)
 
 This is a core module of [denops.vim][denops.vim] which is an ecosystem of
 Vim/Neovim to write plugins in [Deno][deno].
