@@ -13,7 +13,7 @@ export type Context = Record<string, unknown>;
 /**
  * Environment meta information.
  */
-export type Meta = {
+export interface Meta {
   // Current denops mode.
   // In "debug" or "test" mode, some features become enabled,
   // which might impact performance.
@@ -24,7 +24,7 @@ export type Meta = {
   readonly version: string;
   // Host platform name.
   readonly platform: "windows" | "mac" | "linux";
-};
+}
 
 /**
  * Batch error raised when one of the functions fails during batch process.
@@ -48,7 +48,7 @@ export class BatchError extends Error {
 /**
  * Denops is a facade instance visible from each denops plugin.
  */
-export type Denops = {
+export interface Denops {
   /**
    * Denops instance name used to communicate with Vim.
    */
@@ -127,4 +127,4 @@ export type Denops = {
    * @param args: Arguments of the function.
    */
   dispatch(name: string, fn: string, ...args: unknown[]): Promise<unknown>;
-};
+}
