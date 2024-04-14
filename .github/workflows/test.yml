@@ -36,3 +36,14 @@ jobs:
         run: deno fmt --check
       - name: Type check
         run: deno task check
+
+  jsr-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: ${{ env.DENO_VERSION }}
+      - name: Publish (dry-run)
+        run: |
+          deno publish --dry-run
