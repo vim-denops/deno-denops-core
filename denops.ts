@@ -138,3 +138,18 @@ export interface Denops {
    */
   dispatch(name: string, fn: string, ...args: unknown[]): Promise<unknown>;
 }
+
+/**
+ * Denops's entrypoint definition.
+ *
+ * Use this type to ensure the `main` function is properly implemented like
+ *
+ * ```ts
+ * import type { Entrypoint } from "https://deno.land/x/denops_core@$MODULE_VERSION/mod.ts";
+ *
+ * export const main: Entrypoint = (denops) => {
+ *   // ...
+ * }
+ * ```
+ */
+export type Entrypoint = (denops: Denops) => void | Promise<void>;
