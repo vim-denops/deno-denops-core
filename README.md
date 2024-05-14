@@ -1,6 +1,6 @@
 # 🪐 denops_core
 
-[![jsr](https://img.shields.io/jsr/v/%40denops/core?logo=javascript&logoColor=white)](https://jsr.io/@denops/core)
+[![JSR](https://jsr.io/badges/@denops/core)](https://jsr.io/@denops/core)
 [![denoland](https://img.shields.io/github/v/release/vim-denops/deno-denops-core?logo=deno&label=denoland)](https://deno.land/x/denops_core)
 [![deno doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/denops_core/mod.ts)
 [![test](https://github.com/vim-denops/deno-denops/workflows/test/badge.svg)](https://github.com/vim-denops/deno-denops/actions?query=workflow%3Atest)
