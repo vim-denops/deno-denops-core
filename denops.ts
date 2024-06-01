@@ -75,6 +75,11 @@ export interface Denops {
   readonly context: Record<PropertyKey, unknown>;
 
   /**
+   * AbortSignal instance that is triggered when the user invoke `denops#interrupt()`
+   */
+  readonly interrupted: AbortSignal;
+
+  /**
    * User-defined API name and method map used to dispatch API requests.
    */
   dispatcher: Dispatcher;
