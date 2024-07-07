@@ -6,7 +6,7 @@
  *
  * [deno]: https://deno.land/
  * [denops.vim]: https://github.com/vim-denops/denops.vim
- * [denops_std]: https://deno.land/x/denops_std
+ * [denops_std]: https://github.com/vim-denops/deno-denops-std
  *
  * @module
  */
