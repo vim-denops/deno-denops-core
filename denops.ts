@@ -147,7 +147,7 @@ export interface Denops {
 /**
  * Denops's entrypoint definition.
  *
- * Use this type to ensure the `main` function is properly implemented like
+ * Use this type to ensure the `main` function is properly implemented like:
  *
  * ```ts
  * import type { Entrypoint } from "https://deno.land/x/denops_core@$MODULE_VERSION/mod.ts";
@@ -156,5 +156,23 @@ export interface Denops {
  *   // ...
  * }
  * ```
+ *
+ * If an `AsyncDisposable` object is returned, resources can be disposed of
+ * asynchronously when the plugin is unloaded, like:
+ *
+ * ```ts
+ * import type { Entrypoint } from "https://deno.land/x/denops_core@$MODULE_VERSION/mod.ts";
+ *
+ * export const main: Entrypoint = (denops) => {
+ *   // ...
+ *   return {
+ *     [Symbol.asyncDispose]: async () => {
+ *       // Dispose resources...
+ *     }
+ *   }
+ * }
+ * ```
  */
-export type Entrypoint = (denops: Denops) => void | Promise<void>;
+export type Entrypoint = (
+  denops: Denops,
+) => void | AsyncDisposable | Promise<void | AsyncDisposable>;
