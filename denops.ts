@@ -150,7 +150,7 @@ export interface Denops {
  * Use this type to ensure the `main` function is properly implemented like:
  *
  * ```ts
- * import type { Entrypoint } from "https://deno.land/x/denops_core@$MODULE_VERSION/mod.ts";
+ * import type { Entrypoint } from "jsr:@denops/core";
  *
  * export const main: Entrypoint = (denops) => {
  *   // ...
@@ -161,7 +161,7 @@ export interface Denops {
  * asynchronously when the plugin is unloaded, like:
  *
  * ```ts
- * import type { Entrypoint } from "https://deno.land/x/denops_core@$MODULE_VERSION/mod.ts";
+ * import type { Entrypoint } from "jsr:@denops/core";
  *
  * export const main: Entrypoint = (denops) => {
  *   // ...
