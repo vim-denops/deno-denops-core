@@ -77,7 +77,7 @@ export interface Denops {
   /**
    * AbortSignal instance that is triggered when the user invoke `denops#interrupt()`
    */
-  readonly interrupted: AbortSignal;
+  readonly interrupted?: AbortSignal;
 
   /**
    * User-defined API name and method map used to dispatch API requests.
