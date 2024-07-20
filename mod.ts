@@ -1,12 +1,24 @@
 /**
- * This module is a fundamental component of [denops.vim], an ecosystem for crafting plugins in [Deno] for Vim/Neovim.
+ * This is a core module of [denops.vim], an ecosystem for creating Vim/Neovim
+ * plugin in [Deno].
  *
- * It's essential to highlight that the recommended practice for most users is to utilize the [denops_std] module when developing plugins for [denops.vim].
- * The current module is structured as a foundational layer within [denops_std], and utilizing it directly from plugins is **strongly discouraged**.
+ * > [!WARNING]
+ * >
+ * > This module is mainly for internal use. It's **strongly discouraged** to
+ * > utilize this module directly from plugins. Use the [@denops/std] module
+ * > instead.
+ *
+ * ```ts
+ * import type { Entrypoint } from "jsr:@denops/core";
+ *
+ * export const main: Entrypoint = (denops) => {
+ *     // ...
+ * };
+ * ```
  *
  * [deno]: https://deno.land/
  * [denops.vim]: https://github.com/vim-denops/denops.vim
- * [denops_std]: https://deno.land/x/denops_std
+ * [@denops/std]: https://jsr.io/@denops/std
  *
  * @module
  */

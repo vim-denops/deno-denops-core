@@ -75,6 +75,11 @@ export interface Denops {
   readonly context: Record<PropertyKey, unknown>;
 
   /**
+   * AbortSignal instance that is triggered when the user invoke `denops#interrupt()`
+   */
+  readonly interrupted?: AbortSignal;
+
+  /**
    * User-defined API name and method map used to dispatch API requests.
    */
   dispatcher: Dispatcher;
@@ -142,14 +147,32 @@ export interface Denops {
 /**
  * Denops's entrypoint definition.
  *
- * Use this type to ensure the `main` function is properly implemented like
+ * Use this type to ensure the `main` function is properly implemented like:
  *
  * ```ts
- * import type { Entrypoint } from "https://deno.land/x/denops_core@$MODULE_VERSION/mod.ts";
+ * import type { Entrypoint } from "jsr:@denops/core";
  *
  * export const main: Entrypoint = (denops) => {
  *   // ...
  * }
  * ```
+ *
+ * If an `AsyncDisposable` object is returned, resources can be disposed of
+ * asynchronously when the plugin is unloaded, like:
+ *
+ * ```ts
+ * import type { Entrypoint } from "jsr:@denops/core";
+ *
+ * export const main: Entrypoint = (denops) => {
+ *   // ...
+ *   return {
+ *     [Symbol.asyncDispose]: async () => {
+ *       // Dispose resources...
+ *     }
+ *   }
+ * }
+ * ```
  */
-export type Entrypoint = (denops: Denops) => void | Promise<void>;
+export type Entrypoint = (
+  denops: Denops,
+) => void | AsyncDisposable | Promise<void | AsyncDisposable>;

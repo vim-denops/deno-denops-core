@@ -32,6 +32,8 @@ jobs:
         run: deno fmt --check
       - name: Type check
         run: deno task check
+      - name: Test doc
+        run: deno task test
 
   jsr-publish:
     runs-on: ubuntu-latest
