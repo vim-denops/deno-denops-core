@@ -10,6 +10,10 @@
  * Batch error raised when one of the functions fails during batch process.
  */
 export class BatchError extends Error {
+  static {
+    this.prototype.name = "BatchError";
+  }
+
   /**
    * A result list that is successfully completed prior to the error.
    */
@@ -18,7 +22,6 @@ export class BatchError extends Error {
   constructor(message: string, results: unknown[]) {
     super(message);
 
-    this.name = this.constructor.name;
     this.results = results;
   }
 }
