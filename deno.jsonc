@@ -11,6 +11,7 @@
     "update:commit": "deno task -q update --commit --pre-commit=fmt,lint"
   },
   "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.1",
     "jsr:@denops/core": "./mod.ts"
   }
 }
