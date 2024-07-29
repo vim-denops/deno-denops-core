@@ -18,10 +18,6 @@ export class BatchError extends Error {
   constructor(message: string, results: unknown[]) {
     super(message);
 
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, BatchError);
-    }
-
     this.name = this.constructor.name;
     this.results = results;
   }
