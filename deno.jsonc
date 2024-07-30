@@ -2,6 +2,17 @@
   "name": "@denops/core",
   "version": "0.0.0",
   "exports": "./mod.ts",
+  "publish": {
+    "include": [
+      "**/*.ts",
+      "README.md",
+      "LICENSE"
+    ],
+    "exclude": [
+      "**/*_test.ts",
+      ".*"
+    ]
+  },
   "tasks": {
     "check": "deno check **/*.ts",
     "test": "deno test -A --parallel --shuffle --doc",
