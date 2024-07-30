@@ -5,7 +5,7 @@ import {
   assertMatch,
 } from "@std/assert";
 
-import { BatchError } from "./errors.ts";
+import { BatchError } from "./error.ts";
 
 Deno.test("BatchError", async (t) => {
   await t.step(".constructor()", async (t) => {
@@ -30,7 +30,7 @@ Deno.test("BatchError", async (t) => {
     await t.step("returns an error stack trace", () => {
       const actual = new BatchError("foo", ["bar", 1, true]);
       assert(actual.stack);
-      assertMatch(actual.stack, /\bat .*errors_test\.ts:\d+:\d+\n/);
+      assertMatch(actual.stack, /\bat .*error_test\.ts:\d+:\d+\n/);
     });
   });
   await t.step(".results getter", async (t) => {

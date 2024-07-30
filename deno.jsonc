@@ -1,7 +1,11 @@
 {
   "name": "@denops/core",
   "version": "0.0.0",
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./mod.ts",
+    "./type": "./type.ts",
+    "./error": "./error.ts"
+  },
   "publish": {
     "include": [
       "**/*.ts",

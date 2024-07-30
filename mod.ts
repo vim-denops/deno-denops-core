@@ -23,5 +23,5 @@
  * @module
  */
 
-export * from "./errors.ts";
-export type * from "./types.ts";
+export * from "./error.ts";
+export type * from "./type.ts";
