@@ -6,6 +6,17 @@
     "./type": "./type.ts",
     "./error": "./error.ts"
   },
+  "publish": {
+    "include": [
+      "**/*.ts",
+      "README.md",
+      "LICENSE"
+    ],
+    "exclude": [
+      "**/*_test.ts",
+      ".*"
+    ]
+  },
   "tasks": {
     "check": "deno check **/*.ts",
     "test": "deno test -A --parallel --shuffle --doc",
