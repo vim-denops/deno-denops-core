@@ -58,6 +58,8 @@ export interface Denops {
 
   /**
    * Context object for plugins.
+   *
+   * @deprecate All plugins should manage their state by themselves and use `denops.dispatch` to communicate with other denops plugins directly.
    */
   readonly context: Record<PropertyKey, unknown>;
 
