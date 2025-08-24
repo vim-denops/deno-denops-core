@@ -7,7 +7,13 @@
  */
 
 /**
- * API dispatcher
+ * API dispatcher that maps method names to functions.
+ *
+ * Each method must accept `unknown[]` arguments and return `unknown`.
+ * Use type validation libraries like [jsr:@core/unknownutil] to properly
+ * validate and narrow argument types at runtime.
+ *
+ * [jsr:@core/unknownutil]: https://jsr.io/@core/unknownutil
  */
 export type Dispatcher = {
   [key: string]: (...args: unknown[]) => unknown;
@@ -70,6 +76,34 @@ export interface Denops {
 
   /**
    * User-defined API name and method map used to dispatch API requests.
+   *
+   * Each method must accept `unknown[]` arguments and return `unknown` values.
+   * Use type validation libraries like [jsr:@core/unknownutil] to validate
+   * argument types at runtime. These methods can be called from other plugins
+   * using `denops.dispatch()`.
+   *
+   * [jsr:@core/unknownutil]: https://jsr.io/@core/unknownutil
+   *
+   * @example
+   * ```ts
+   * import { is, assert } from "jsr:@core/unknownutil";
+   *
+   * denops.dispatcher = {
+   *   "hello": (name: unknown) => {
+   *     assert(name, is.String);
+   *     return `Hello, ${name}!`;
+   *   },
+   *   "add": (a: unknown, b: unknown) => {
+   *     assert(a, is.Number);
+   *     assert(b, is.Number);
+   *     return a + b;
+   *   },
+   *   "fetchData": async (id: unknown) => {
+   *     assert(id, is.String);
+   *     return await fetch(`/api/data/${id}`);
+   *   },
+   * };
+   * ```
    */
   dispatcher: Dispatcher;
 
@@ -126,9 +160,28 @@ export interface Denops {
   /**
    * Dispatch an arbitrary function of an arbitrary plugin and return the result.
    *
-   * @param name: A plugin registration name.
-   * @param fn: A function name in the API registration.
-   * @param args: Arguments of the function.
+   * @param name A plugin registration name.
+   * @param fn A function name in the dispatcher of the target plugin.
+   * @param args Arguments to pass to the function. Arguments are passed as `unknown` types.
+   * @returns A Promise that resolves to the return value of the dispatched function.
+   *          The return type is `unknown` and should be validated if needed.
+   *
+   * @example
+   * ```ts
+   * import { is } from "jsr:@core/unknownutil";
+   *
+   * // Call method and validate return type
+   * const result = await denops.dispatch("myPlugin", "hello", "world");
+   * if (is.String(result)) {
+   *   console.log(`Greeting: ${result}`);
+   * }
+   *
+   * // Call method with multiple arguments
+   * const sum = await denops.dispatch("calculator", "add", 5, 3);
+   * if (is.Number(sum)) {
+   *   console.log(`Sum: ${sum}`);
+   * }
+   * ```
    */
   dispatch(name: string, fn: string, ...args: unknown[]): Promise<unknown>;
 }
