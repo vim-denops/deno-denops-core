@@ -86,22 +86,25 @@ export interface Denops {
    *
    * @example
    * ```ts
+   * import type { Entrypoint } from "jsr:@denops/core";
    * import { is, assert } from "jsr:@core/unknownutil";
    *
-   * denops.dispatcher = {
-   *   "hello": (name: unknown) => {
-   *     assert(name, is.String);
-   *     return `Hello, ${name}!`;
-   *   },
-   *   "add": (a: unknown, b: unknown) => {
-   *     assert(a, is.Number);
-   *     assert(b, is.Number);
-   *     return a + b;
-   *   },
-   *   "fetchData": async (id: unknown) => {
-   *     assert(id, is.String);
-   *     return await fetch(`/api/data/${id}`);
-   *   },
+   * export const main: Entrypoint = (denops) => {
+   *   denops.dispatcher = {
+   *     "hello": (name: unknown) => {
+   *       assert(name, is.String);
+   *       return `Hello, ${name}!`;
+   *     },
+   *     "add": (a: unknown, b: unknown) => {
+   *       assert(a, is.Number);
+   *       assert(b, is.Number);
+   *       return a + b;
+   *     },
+   *     "fetchData": async (id: unknown) => {
+   *       assert(id, is.String);
+   *       return await fetch(`/api/data/${id}`);
+   *     },
+   *   };
    * };
    * ```
    */
@@ -168,19 +171,22 @@ export interface Denops {
    *
    * @example
    * ```ts
+   * import type { Entrypoint } from "jsr:@denops/core";
    * import { is } from "jsr:@core/unknownutil";
    *
-   * // Call method and validate return type
-   * const result = await denops.dispatch("myPlugin", "hello", "world");
-   * if (is.String(result)) {
-   *   console.log(`Greeting: ${result}`);
-   * }
+   * export const main: Entrypoint = async (denops) => {
+   *   // Call method and validate return type
+   *   const result = await denops.dispatch("myPlugin", "hello", "world");
+   *   if (is.String(result)) {
+   *     console.log(`Greeting: ${result}`);
+   *   }
    *
-   * // Call method with multiple arguments
-   * const sum = await denops.dispatch("calculator", "add", 5, 3);
-   * if (is.Number(sum)) {
-   *   console.log(`Sum: ${sum}`);
-   * }
+   *   // Call method with multiple arguments
+   *   const sum = await denops.dispatch("calculator", "add", 5, 3);
+   *   if (is.Number(sum)) {
+   *     console.log(`Sum: ${sum}`);
+   *   }
+   * };
    * ```
    */
   dispatch(name: string, fn: string, ...args: unknown[]): Promise<unknown>;
