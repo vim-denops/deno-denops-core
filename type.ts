@@ -20,6 +20,14 @@ export type Dispatcher = {
 };
 
 /**
+ * Represents a Vim/Neovim function call.
+ *
+ * `fn`: A function name of Vim/Neovim.
+ * `args`: Arguments of the function.
+ */
+export type Call = [fn: string, ...args: unknown[]];
+
+/**
  * Context that expands into the local namespace (l:)
  */
 export type Context = Record<string, unknown>;
@@ -138,11 +146,11 @@ export interface Denops {
    * of the error instance holds succeeded results of functions prior to the
    * error.
    *
-   * @param calls: A list of tuples ([fn, args]) to call Vim/Neovim functions.
+   * @param calls: A list of tuples ([fn, ...args]) to call Vim/Neovim functions.
    *
    * Note that arguments after `undefined` in `args` will be dropped for convenience.
    */
-  batch(...calls: [string, ...unknown[]][]): Promise<unknown[]>;
+  batch(...calls: Call[]): Promise<unknown[]>;
 
   /**
    * Execute an arbitrary command of Vim/Neovim under a given context.
